@@ -2,6 +2,7 @@
 ### [最新バージョンをダウンロード](https://github.com/Dolphin-kun/FormulaText/releases/latest)
 ## 概要
 LaTeX記法で数式を書くことができる図形の種類「LaTeX数式」を追加します。
+フォントは固定です。
 
 ## 使い方
 図形アイテムを追加して、種類から「LaTeX数式」を選択してください。
