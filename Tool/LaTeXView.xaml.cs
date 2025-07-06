@@ -72,7 +72,7 @@ namespace Formula.Tool
 
             if (parentWindow != null)
             {
-                parentWindow.Title = "TeX数式 記法リスト";
+                parentWindow.Title = "LaTeX数式 記法リスト";
                 parentWindow.MinWidth = 700;
                 parentWindow.MinHeight = 300;
             }
