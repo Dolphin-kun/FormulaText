@@ -16,15 +16,21 @@ namespace Formula.Tool
         {
             InitializeComponent();
 
-            Examples.Add(new FormulaExample(@"x^n+y^n=z^n"));
-            Examples.Add(new FormulaExample(@"\frac{1}{2}"));
-            Examples.Add(new FormulaExample(@"\int_a^b f(x)dx"));
-            Examples.Add(new FormulaExample(@"\sum_{i=1}^n i"));
-            Examples.Add(new FormulaExample(@"\sqrt{x}"));
-            Examples.Add(new FormulaExample(@"\left( \frac{a}{b} \right)"));
-            Examples.Add(new FormulaExample(@"\alpha + \beta = \gamma"));
-            Examples.Add(new FormulaExample(@"\lim_{x \to 0}"));
-            
+            Examples.Add(new FormulaExample("改行", @"a\\b"));
+
+            Examples.Add(new FormulaExample("四則演算", @"a + b - c = d"));
+            Examples.Add(new FormulaExample("四則演算", @"a \cdot b \times c \neq d"));
+            Examples.Add(new FormulaExample("四則演算", @"\frac{a}{b} \div c = d"));
+
+            Examples.Add(new FormulaExample("カッコ", @"\left( \frac{a}{b} \right)"));
+            Examples.Add(new FormulaExample("カッコ", @"\left[ a + b \right]"));
+            Examples.Add(new FormulaExample("カッコ", @"\left\{ a \times b \right\}"));
+
+            Examples.Add(new FormulaExample("記号", @"\alpha + \beta = \gamma"));
+            Examples.Add(new FormulaExample("記号", @"\int_a^b f(x)dx"));
+            Examples.Add(new FormulaExample("記号", @"\sum_{i=1}^n i"));
+
+            Examples.Add(new FormulaExample("サンプル", @"\int_0^{\infty}{x^{2n} e^{-a x^2} \, dx} = \frac{2n-1}{2a} \int_0^{\infty}{x^{2(n-1)} e^{-a x^2} \, dx} = \frac{(2n-1)!!}{2^{n+1}} \sqrt{\frac{\pi}{a^{2n+1}}}"));
 
             this.DataContext = this;
             this.Loaded += TeXView_Loaded;
@@ -32,11 +38,13 @@ namespace Formula.Tool
 
         public class FormulaExample
         {
+            public string Category { get; set; }
             public string Code { get; set; }
             public BitmapSource Rendered { get; }
 
-            public FormulaExample(string code)
+            public FormulaExample(string category, string code)
             {
+                Category = category;
                 Code = code;
                 Rendered = RenderFormula(code);
             }
@@ -63,7 +71,12 @@ namespace Formula.Tool
             var parentWindow = Window.GetWindow(this);
 
             if (parentWindow != null)
+            {
                 parentWindow.Title = "TeX数式 記法リスト";
+                parentWindow.MinWidth = 700;
+                parentWindow.MinHeight = 300;
+            }
+                
         }
     }
 }

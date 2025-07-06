@@ -6,22 +6,61 @@
              xmlns:local="clr-namespace:Formula.Tool"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="GroupedExamples" Source="{Binding Examples}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Category"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
+
     <ScrollViewer>
-        <ItemsControl ItemsSource="{Binding Examples, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <ItemsControl ItemsSource="{Binding Source={StaticResource GroupedExamples}}">
+            <ItemsControl.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       Margin="8,16,8,4"
+                                       Foreground="DarkSlateBlue"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ItemsControl.GroupStyle>
+
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border Margin="4" Padding="4" BorderBrush="Gray" BorderThickness="1" CornerRadius="4">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBox Text="{Binding Code}"
-                                     FontFamily="Consolas"
-                                     Width="200" Height="75"
-                                     IsReadOnly="True"
-                                     BorderThickness="0"
-                                     Background="Transparent"
-                                     VerticalAlignment="Center"
-                                     Padding="4"
-                             />
-                            <Image Source="{Binding Rendered}" Height="50"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4">
+                            <Grid Margin="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="400"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBox Grid.Column="0"
+                                        Text="{Binding Code}"
+                                        FontFamily="Consolas"
+                                        Height="75"
+                                         IsReadOnly="True"
+                                         TextWrapping="Wrap"
+                                         BorderThickness="1"
+                                         Background="White"
+                                         Padding="4"
+                                         Margin="0,0,8,0"/>
+
+                                <Rectangle Grid.Column="1" Width="1" Fill="Gray" Margin="4"/>
+
+                                <Image Grid.Column="2"
+                                       Source="{Binding Rendered}"
+                                       Height="50"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"/>
+                            </Grid>
+
                         </StackPanel>
                     </Border>
                 </DataTemplate>

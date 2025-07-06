@@ -8,6 +8,6 @@ namespace Formula.Tool
 
         public Type ViewType => typeof(LaTeXView);
 
-        public string Name => "LaTeX数式";
+        public string Name => "LaTeX数式 記法リスト";
     }
 }
