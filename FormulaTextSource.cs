@@ -48,7 +48,7 @@ namespace Formula
             var color = formulaTextParameter.Color;
 
             //サイズが変わっていない場合は何もしない
-            if (commandList != null && _size == size && _text != text && _color != color)
+            if (commandList != null && _size == size && _text == text && _color == color)
                 return;
 
             var dc = devices.DeviceContext;
